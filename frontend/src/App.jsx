@@ -26,7 +26,9 @@ function App() {
         <Route
           path="/"
           element={
+            <RutaPrivada>
               <Home />
+            </RutaPrivada>
           }
         />
         <Route

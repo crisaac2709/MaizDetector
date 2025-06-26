@@ -1,13 +1,16 @@
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import axios from 'axios';
 import TarjetaPrediccion from '../components/TarjetaPrediccion';
 import '../styles/Historial.css';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 function Historial() {
   const [predicciones, setPredicciones] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState(null);
+  const {userData}  = useContext(AuthContext)
 
   useEffect(() => {
     const fetchHistorial = async () => {
@@ -55,7 +58,7 @@ function Historial() {
     <div className="history-container">
       <div className="history-header">
         <h2 className="history-title">
-          <span className="title-icon">📋</span> Historial de Predicciones
+          <span className="title-icon">📋</span> Historial de Predicciones de <span className="title-highlight">{userData ? `${userData.username}` : 'Usuario'}</span>
         </h2>
         <p className="history-subtitle">
           Revisa todas las predicciones que has realizado

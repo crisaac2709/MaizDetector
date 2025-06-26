@@ -10,7 +10,7 @@ function LoginPage() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const { setToken } = useContext(AuthContext); 
+  const { setToken, setUser } = useContext(AuthContext); 
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -23,10 +23,20 @@ function LoginPage() {
     
     try {
       const res = await axios.post('http://localhost:8000/api/usuarios/login/', form);
+      
+      console.log(`Respuesta de la API: ${JSON.stringify(res.data, null, 2)}`)
+      
       localStorage.setItem('access', res.data.access);
       localStorage.setItem('refresh', res.data.refresh);
       setToken(res.data.access);  
-      navigate('/home');
+
+      const user = {
+        username: res.data.username,
+        email: res.data.email
+      }
+      setUser(user)
+
+      navigate('/');
     } catch (err) {
       setError(err.response?.data?.detail || 'Credenciales inválidas. Por favor, inténtalo de nuevo.');
     } finally {

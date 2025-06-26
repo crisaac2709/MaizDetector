@@ -121,6 +121,10 @@ function Prediccion() {
                   <span className="result-value">{resultado.clase}</span>
                 </div>
                 <div className="result-item">
+                  <span className="result-label">Nombre en español:</span>
+                  <span className="result-value">{getNombreEnfermedad(resultado.clase)}</span>
+                </div>
+                <div className="result-item">
                   <span className="result-label">Nivel de confianza:</span>
                   <span className="result-value confidence">
                     {(resultado.confianza * 100).toFixed(2)}%
@@ -129,7 +133,7 @@ function Prediccion() {
                 <div className="result-item">
                   <span className="result-label">Recomendación:</span>
                   <span className="result-value">
-                    {getRecommendation(resultado.clase)}
+                    {getRecomendacion(resultado.clase)}
                   </span>
                 </div>
               </div>
@@ -141,18 +145,34 @@ function Prediccion() {
   );
 }
 
-// Función auxiliar para recomendaciones basadas en la condición detectada
-function getRecommendation(condition) {
-  const recommendations = {
-  "Healthy": "🌱 Tu cultivo parece estar en buenas condiciones. Mantén las prácticas actuales.",
-  "Common_Rust": "🌾 Aplica fungicidas específicos contra roya común y realiza rotación de cultivos.",
-  "Blight": "🛡️ Elimina hojas infectadas y usa tratamientos preventivos de control de tizón.",
-  "Gray_Leaf_Spot": "🍂 Evita riegos por aspersión y aplica fungicidas adecuados contra manchas foliares.",
-  "default": "📋 Consulta con un especialista agrícola para un diagnóstico más preciso."
-};
-  
-  return recommendations[condition] || recommendations["default"];
 
+function getRecomendacion(condicion) {
+  const recomendaciones = {
+    "Healthy": "🌱 Tu cultivo parece estar en buenas condiciones. Mantén las prácticas actuales, como un buen manejo del riego, fertilización equilibrada y control de plagas preventivo. Asegúrate de monitorear regularmente el estado de las plantas para mantenerlas saludables.",
+    
+    "Common_Rust": "🌾 Roya Común: Aplica fungicidas específicos contra la roya común, preferentemente en las primeras etapas de la enfermedad. Realiza rotación de cultivos para reducir la persistencia de la enfermedad en el suelo y asegúrate de controlar la humedad excesiva en las plantas para evitar su propagación.",
+    
+    "Blight": "🛡️ Tizón: Elimina inmediatamente las hojas infectadas para prevenir la propagación de la enfermedad. Utiliza tratamientos preventivos con fungicidas de amplio espectro y asegúrate de mantener una buena circulación de aire entre las plantas. Evita el riego por aspersión, ya que puede favorecer la propagación del hongo.",
+    
+    "Gray_Leaf_Spot": "🍂 Manchas Foliares: Evita riegos por aspersión, ya que la humedad en las hojas puede favorecer la aparición de manchas foliares. Aplica fungicidas adecuados contra el hongo y asegúrate de mantener un buen control del espacio entre las plantas para mejorar la ventilación. Realiza una buena práctica de limpieza de residuos de cultivo al final de la temporada.",
+    
+    "default": "📋 Consulta con un especialista agrícola para un diagnóstico más preciso. Es importante hacer un análisis adecuado del terreno y las condiciones de cultivo antes de aplicar cualquier tratamiento o recomendación. Un diagnóstico adecuado ayudará a elegir el tratamiento más efectivo."
+  };
+  
+  return recomendaciones[condicion] || recomendaciones["default"];
 }
+
+
+function getNombreEnfermedad(condicion) {
+  const nombres = {
+    "Healthy": "🌱 Hoja Sana",
+    "Common_Rust": "🌾 Roya Común",
+    "Blight": "🛡️ Tizón",
+    "Gray_Leaf_Spot": "🍂 Manchas Foliares",
+    "default": "❓ No Reconocido"
+  };
+  
+  return nombres[condicion] || nombres["No default"]
+};
 
 export default Prediccion;

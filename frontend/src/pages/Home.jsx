@@ -1,14 +1,20 @@
 import { Link } from 'react-router-dom';
 import '../styles/Home.css';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 function Home() {
+
+  const {userData} = useContext(AuthContext)
+
   return (
     <div className="home-container">
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
           <h1 className="hero-title">
-            <span className="title-highlight">Transforma</span> tu cultivo de maíz con inteligencia artificial
+            Hola <span className="title-highlight">{userData ? `${userData.username}` : 'Usuario'}</span> <br /> <br />
+            Transforma tu cultivo de maíz con inteligencia artificial
           </h1>
           <p className="hero-subtitle">
             Predicciones precisas, análisis inteligente y recomendaciones personalizadas para maximizar tu producción
@@ -82,40 +88,6 @@ function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
-
-      {/*}
-      <section className="testimonials">
-        <h2 className="section-title">Lo que dicen nuestros <span className="highlight">usuarios</span></h2>
-        <div className="testimonials-grid">
-          <div className="testimonial-card">
-            <div className="testimonial-content">
-              "MaízVision revolucionó nuestra forma de planificar los cultivos. Las predicciones tienen un 95% de precisión."
-            </div>
-            <div className="testimonial-author">
-              <div className="author-avatar">👨‍🌾</div>
-              <div className="author-info">
-                <h4>Juan Pérez</h4>
-                <p>Agricultor, Sonora</p>
-              </div>
-            </div>
-          </div>
-          <div className="testimonial-card">
-            <div className="testimonial-content">
-              "La interfaz es intuitiva y los reportes detallados nos ayudan a tomar mejores decisiones financieras."
-            </div>
-            <div className="testimonial-author">
-              <div className="author-avatar">👩‍💼</div>
-              <div className="author-info">
-                <h4>María González</h4>
-                <p>Gerente Agrícola, Sinaloa</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      */}
 
       {/* CTA Section */}
       <section className="cta-section">

@@ -41,6 +41,7 @@
   background-clip: text;
   color: transparent;
   position: relative;
+  font-style: italic;
 }
 
 .title-highlight::after {

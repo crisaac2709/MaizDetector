@@ -23,13 +23,14 @@ function Navbar() {
         </div>
 
         <div className="navbar-links">
-          <Link to="/" className="nav-link">
-            <span className="link-icon">🏠</span>
-            <span>Home</span>
-          </Link>
+          
 
           {token ? (
             <>
+              <Link to="/" className="nav-link">
+                <span className="link-icon">🏠</span>
+                <span>Home</span>
+              </Link>
               <Link to="/prediccion" className="nav-link">
                 <span className="link-icon">🔮</span>
                 <span>Predicción</span>
