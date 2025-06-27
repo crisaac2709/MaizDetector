@@ -45,6 +45,7 @@ class PerfilUsuarioAPI(APIView):
     def get(self, request):
         serializer = UsuarioSerializer(request.user)
         return Response(serializer.data)
+    
 
 class LogoutAPI(APIView):
     permission_classes = [IsAuthenticated]

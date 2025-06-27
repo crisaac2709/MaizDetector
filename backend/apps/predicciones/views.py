@@ -109,6 +109,7 @@ class EliminarPrediccionAPI(DestroyAPIView):
     def get_queryset(self):
         return self.queryset.filter(usuario=self.request.user)
     
+
 class RecomendacionDeepSeekAPI(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -120,8 +121,8 @@ class RecomendacionDeepSeekAPI(APIView):
 
         prompt = f"""
         Soy un agricultor. Un sistema de visión artificial detectó que una hoja de maíz presenta la condición: '{pred.clase}'.
-        ¿Podrías darme recomendaciones profesionales para tratarla o prevenirla? Asi mismo mencioname cual fue la causa que provoco 
-        esa condicion.
+        ¿Podrías darme 3 recomendaciones profesionales para tratarla o prevenirla? Asi mismo mencioname 3 causas que provocaron
+        esa condicion. Si esta sana, solo dame 3 recomendaciones para mantenerla en ese estado.
         """
         respuesta = responder_deepseek(prompt)
         return Response({"clase": pred.clase, "recomendacion": respuesta})
